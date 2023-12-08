@@ -1,0 +1,86 @@
+classdef GroupClass
+    
+    properties
+        subjects = strsplit('Math Programing Physics Phylosophy');
+        groupNumber = '';
+        course = 3;
+        semestr = 5;
+        averageMark = 0;
+        groupMises = 0;
+        studentList = [StudentClass('Fedorenko Gena Pavlovich', 'E312', [50, 50, 50, 50], 3), StudentClass('Kasinak Evgeniy Valerievich', 'E312', [60, 60, 60, 60], 15), StudentClass('Finik Konstantin Svyatoslavovich', 'E312', [70, 70, 70, 70], 20), StudentClass('Apelsinov Pavel Olegovich', 'E312', [80, 80, 80, 80], 0), StudentClass('Malinov Petr Nikitovich', 'E312', [90, 90, 90, 90], 6)]
+    end
+    
+    methods
+        function obj = GroupClass(inGroupNumber)
+            obj.groupNumber = inGroupNumber;
+        end
+        
+        function numberOfStudent = GetNumberOfStudent(obj)
+            numberOfStudent = length(obj.studentList);
+        end
+        
+        function course = GetCourse(obj)
+            course = obj.course;
+        end
+        
+        function semestr = GetSemestr(obj)
+            semestr = obj.semestr;
+        end
+        
+        function listOfStudents = GetListOfStudents(obj)
+            listOfStudents = obj.studentList;
+        end
+        
+        function countOfSubjects = GetSubjects(obj)
+            countOfSubjects = obj.subjects;
+        end
+        
+        function group = GetGroupNumber(obj)
+            group = obj.groupNumber;
+        end
+        
+        function averMark = GetAverageMarkInGroup(obj)
+            sumOfMarks = 0;
+            for student = 1:length(obj.studentList)
+                sumOfMarks = sumOfMarks + obj.studentList(student).GetAverMark();
+            end
+            averMark = sumOfMarks/length(obj.studentList());
+        end
+        
+        function groupMisses = GetMissesInGroup(obj)
+            sumOfMisses = 0;
+            for student = 1:length(obj.studentList)
+                sumOfMisses = sumOfMisses + obj.studentList(student).GetMisses();
+            end
+            groupMisses = sumOfMisses;
+        end
+        
+        function SetRandomMarksForEveryStudent(obj)
+            for student = 1:length(obj.studentList)
+                obj.studentList(student).SetRandomMarks() 
+            end
+        end
+        
+        function sortedList = GetSortedStudentList(obj)
+            unsortedList = obj.studentList;
+            studentToChange = StudentClass('Fedorenko Gena Pavlovich', 'E312', [50, 50, 50, 50], 3);
+            
+            for cycle=1:length(unsortedList)
+                for student=1:length(unsortedList)-1
+                    if unsortedList(student).GetAverMark() < unsortedList(student + 1).GetAverMark()
+                        studentToChange = unsortedList(student);
+                        unsortedList(student) = unsortedList(student + 1);
+                        unsortedList(student + 1) = studentToChange;
+                    end
+                end
+            end
+            sortedList = unsortedList();        
+        end
+        
+        function top4Student = Get4BestStudent(obj)
+            sortedStudentList = obj.Get
+        end
+    end
+    
+end
+
